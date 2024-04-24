@@ -1,6 +1,6 @@
 # maxmind-graphql
 
-GraphQL API for MaxMind
+GraphQL API for [MaxMind](https://github.com/maxmind/MaxMind-DB-Reader-python). Built using [starlette](https://github.com/encode/starlette) ASGI framework, and [strawberry-graphql](https://github.com/strawberry-graphql/strawberry).
 
 ## Usage
 
