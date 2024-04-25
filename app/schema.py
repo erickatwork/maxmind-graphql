@@ -47,33 +47,39 @@ class Query:
         # City
         if maxmind_db.city_db:
             city_ip = maxmind_db.city_db.get(ip)
-            ip_metadata.continent = city_ip.get('continent', {}).get('names', {}).get('en', 'Unknown') if maxmind_db.city_db else 'Unknown'
-            ip_metadata.continent_code = city_ip.get('continent', {}).get('code', 'Unknown') if maxmind_db.city_db else 'Unknown'
-            ip_metadata.country = city_ip.get('country', {}).get('names', {}).get('en', 'Unknown') if maxmind_db.city_db else 'Unknown'
-            ip_metadata.country_code = city_ip.get('country', {}).get('iso_code', 'Unknown') if maxmind_db.city_db else 'Unknown'
-            ip_metadata.registered_country = city_ip.get('registered_country', {}).get('names', {}).get('en', 'Unknown') if maxmind_db.city_db else 'Unknown'
-            ip_metadata.registered_country_code = city_ip.get('registered_country', {}).get('iso_code', 'Unknown') if maxmind_db.city_db else 'Unknown'
-            ip_metadata.city = city_ip.get('city', {}).get('names', {}).get('en', 'Unknown') if maxmind_db.city_db else 'Unknown'
-            ip_metadata.accuracy_radius = city_ip.get('location', {}).get('accuracy_radius', -1) if maxmind_db.city_db else -1
-            ip_metadata.latitude = city_ip.get('location', {}).get('latitude', -1) if maxmind_db.city_db else -1
-            ip_metadata.longitude = city_ip.get('location', {}).get('longitude', -1) if maxmind_db.city_db else -1
-            ip_metadata.timezone = city_ip.get('location', {}).get('time_zone', 'Unknown') if maxmind_db.city_db else 'Unknown'
-            
+            if city_ip:
+                ip_metadata.continent = city_ip.get('continent', {}).get('names', {}).get('en', 'Unknown') if maxmind_db.city_db else 'Unknown'
+                ip_metadata.continent_code = city_ip.get('continent', {}).get('code', 'Unknown') if maxmind_db.city_db else 'Unknown'
+                ip_metadata.country = city_ip.get('country', {}).get('names', {}).get('en', 'Unknown') if maxmind_db.city_db else 'Unknown'
+                ip_metadata.country_code = city_ip.get('country', {}).get('iso_code', 'Unknown') if maxmind_db.city_db else 'Unknown'
+                ip_metadata.registered_country = city_ip.get('registered_country', {}).get('names', {}).get('en', 'Unknown') if maxmind_db.city_db else 'Unknown'
+                ip_metadata.registered_country_code = city_ip.get('registered_country', {}).get('iso_code', 'Unknown') if maxmind_db.city_db else 'Unknown'
+                ip_metadata.city = city_ip.get('city', {}).get('names', {}).get('en', 'Unknown') if maxmind_db.city_db else 'Unknown'
+                ip_metadata.accuracy_radius = city_ip.get('location', {}).get('accuracy_radius', -1) if maxmind_db.city_db else -1
+                ip_metadata.latitude = city_ip.get('location', {}).get('latitude', -1) if maxmind_db.city_db else -1
+                ip_metadata.longitude = city_ip.get('location', {}).get('longitude', -1) if maxmind_db.city_db else -1
+                ip_metadata.timezone = city_ip.get('location', {}).get('time_zone', 'Unknown') if maxmind_db.city_db else 'Unknown'
+ 
         # Connection Type
         if maxmind_db.connection_type_db:
-            ip_metadata.connection_type = maxmind_db.connection_type_db.get(ip).get('connection_type', 'Unknown') if maxmind_db.connection_type_db.get(ip) else 'Unknown'
+            connection_type_ip = maxmind_db.connection_type_db.get(ip)
+            if connection_type_ip:
+                ip_metadata.connection_type = connection_type_ip.get('connection_type', 'Unknown') if maxmind_db.connection_type_db.get(ip) else 'Unknown'
 
         # Domain
         if maxmind_db.domain_db:
-            ip_metadata.domain = maxmind_db.domain_db.get(ip).get('domain', 'Unknown') if maxmind_db.domain_db.get(ip) else 'Unknown'
+            domain_ip = maxmind_db.domain_db.get(ip)
+            if domain_ip:
+                ip_metadata.domain = domain_ip.get('domain', 'Unknown') if maxmind_db.domain_db.get(ip) else 'Unknown'
 
         # ISP
         if maxmind_db.isp_db:
             isp_ip = maxmind_db.isp_db.get(ip)
-            ip_metadata.asn = isp_ip.get('autonomous_system_number', -1) if maxmind_db.isp_db.get(ip) else -1
-            ip_metadata.asn_org = isp_ip.get('autonomous_system_organization', 'Unknown') if maxmind_db.isp_db.get(ip) else 'Unknown'
-            ip_metadata.isp = isp_ip.get('isp', 'Unknown') if maxmind_db.isp_db.get(ip) else 'Unknown'
-            ip_metadata.isp_org = isp_ip.get('organization', 'Unknown') if maxmind_db.isp_db.get(ip) else 'Unknown'
+            if isp_ip:
+                ip_metadata.asn = isp_ip.get('autonomous_system_number', -1) if maxmind_db.isp_db.get(ip) else -1
+                ip_metadata.asn_org = isp_ip.get('autonomous_system_organization', 'Unknown') if maxmind_db.isp_db.get(ip) else 'Unknown'
+                ip_metadata.isp = isp_ip.get('isp', 'Unknown') if maxmind_db.isp_db.get(ip) else 'Unknown'
+                ip_metadata.isp_org = isp_ip.get('organization', 'Unknown') if maxmind_db.isp_db.get(ip) else 'Unknown'
 
         return ip_metadata
     
